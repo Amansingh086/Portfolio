@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply font-sans antialiased bg-cyber-slate-950 text-slate-300 transition-colors duration-300 overflow-x-hidden;
+  }
+  body.light {
+    @apply bg-slate-50 text-slate-800;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-cyber-slate-950;
+}
+.light ::-webkit-scrollbar-track {
+  @apply bg-slate-100;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-800 rounded-full border border-cyber-slate-950;
+}
+.light ::-webkit-scrollbar-thumb {
+  @apply bg-slate-300 rounded-full border border-slate-100;
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-cyber-emerald;
+}
+
+/* Glassmorphism Styles */
+.glass-panel {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  background: rgba(11, 19, 34, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.glass-panel-light {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.glass-card-hover {
+  @apply transition-all duration-300 hover:-translate-y-1 hover:border-cyber-emerald/30 hover:shadow-glow-emerald;
+}
+
+.dark .glass-card-hover:hover {
+  border-color: rgba(16, 185, 129, 0.3);
+  box-shadow: 0 0 25px rgba(16, 185, 129, 0.15);
+}
+
+.light .glass-card-hover:hover {
+  border-color: rgba(139, 92, 246, 0.3);
+  box-shadow: 0 10px 30px rgba(139, 92, 246, 0.1);
+}
+
+/* Glowing Spotlights */
+.glow-spotlight {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.15;
+  pointer-events: none;
+  z-index: 0;
+  transition: all 0.5s ease;
+}
+
+.light .glow-spotlight {
+  opacity: 0.06;
+  filter: blur(120px);
+}
+
+/* Timeline Custom line decoration */
+.timeline-line {
+  background: linear-gradient(to bottom, #10b981, #8b5cf6, #ec4899);
+}
+
+/* Printable PDF Rules */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+    font-size: 11pt !important;
+  }
+  
+  .no-print {
+    display: none !important;
+  }
+  
+  .print-only {
+    display: block !important;
+  }
+
+  .print-card {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin-bottom: 1.5rem !important;
+    page-break-inside: avoid;
+  }
+
+  .print-grid {
+    display: block !important;
+  }
+
+  .print-page-break {
+    page-break-before: always;
+  }
+}
