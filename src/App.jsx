@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import ResumeHub from './components/ResumeHub';
@@ -47,7 +47,8 @@ export default function App() {
   };
 
   return (
-    <div className="relative min-h-screen font-sans antialiased text-slate-350 bg-cyber-slate-950 dark:bg-cyber-slate-950 dark:text-slate-300 transition-colors duration-300">
+    <div className="premium-app-shell relative min-h-screen font-sans antialiased text-slate-350 dark:text-slate-300 transition-colors duration-300">
+      <div className="pointer-events-none fixed inset-0 z-0 premium-background" />
       
       {/* Floating Header */}
       <Header 
@@ -59,7 +60,7 @@ export default function App() {
       />
 
       {/* Main Container */}
-      <main className="relative">
+      <main className="relative z-10">
         <Hero profile={resumeData.profile} />
         
         <ResumeHub resumeData={resumeData} />
@@ -72,7 +73,9 @@ export default function App() {
       </main>
 
       {/* Footer copyright and actions */}
-      <Footer name={resumeData.profile.name} />
+      <div className="relative z-10">
+        <Footer name={resumeData.profile.name} />
+      </div>
 
       {/* Collapsible Edit Side Panel */}
       <ResumeDrawer 

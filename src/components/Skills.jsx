@@ -1,4 +1,3 @@
-import React from 'react';
 import { Code, CheckCircle, Terminal, Layers, AppWindow } from 'lucide-react';
 
 export default function Skills({ skills }) {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { X, Briefcase, User, Code, FolderGit2, RotateCcw, Plus, Trash2 } from 'lucide-react';
 
 export default function ResumeDrawer({ isOpen, onClose, resumeData, setResumeData, resetToDefault }) {

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Sun, Moon, Settings, Menu, X, ArrowUpRight } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { Sun, Moon, Settings, Menu, X } from 'lucide-react';
 
 export default function Header({ isDarkMode, setIsDarkMode, toggleDrawer, isDrawerOpen, name }) {
   const [isScrolled, setIsScrolled] = useState(false);

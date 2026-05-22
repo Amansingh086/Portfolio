@@ -1,9 +1,35 @@
-import React, { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Briefcase, GraduationCap, Award, Printer, ArrowRight, ChevronDown, ChevronUp } from 'lucide-react';
+import { sendResumeViewNotification } from '../lib/resumeNotification';
 
 export default function ResumeHub({ resumeData }) {
   const [activeSubTab, setActiveSubTab] = useState('timeline');
   const [expandedJob, setExpandedJob] = useState(resumeData.experience[0]?.id || null);
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return undefined;
+
+    const notifyResumeViewed = () => {
+      sendResumeViewNotification(resumeData.profile).catch((error) => {
+        console.warn('Resume view notification failed:', error);
+      });
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          notifyResumeViewed();
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.45 }
+    );
+
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, [resumeData.profile]);
 
   const toggleJobExpansion = (id) => {
     setExpandedJob(expandedJob === id ? null : id);
@@ -14,7 +40,7 @@ export default function ResumeHub({ resumeData }) {
   };
 
   return (
-    <section id="resume" className="relative py-20 overflow-hidden">
+    <section ref={sectionRef} id="resume" className="relative py-20 overflow-hidden">
       {/* Background spotlights */}
       <div className="absolute top-[40%] left-[10%] w-[350px] h-[350px] rounded-full bg-cyber-teal/5 blur-3xl" />
 
@@ -81,7 +107,7 @@ export default function ResumeHub({ resumeData }) {
               {/* Vertical timeline line */}
               <div className="absolute left-4 top-2 bottom-2 w-0.5 timeline-line rounded opacity-40" />
 
-              {resumeData.experience.map((exp, index) => {
+              {resumeData.experience.map((exp) => {
                 const isExpanded = expandedJob === exp.id;
                 return (
                   <div key={exp.id} className="relative pl-12 group">

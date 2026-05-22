@@ -9,11 +9,44 @@
     scroll-behavior: smooth;
   }
   body {
-    @apply font-sans antialiased bg-cyber-slate-950 text-slate-300 transition-colors duration-300 overflow-x-hidden;
+    @apply font-sans antialiased text-slate-300 transition-colors duration-300 overflow-x-hidden;
+    background: #050816;
   }
   body.light {
-    @apply bg-slate-50 text-slate-800;
+    @apply text-slate-800;
+    background: #f7f8fb;
   }
+}
+
+.premium-app-shell {
+  background:
+    linear-gradient(135deg, rgba(5, 8, 22, 0.98) 0%, rgba(7, 10, 19, 0.96) 42%, rgba(15, 23, 42, 0.92) 100%);
+}
+
+.premium-background {
+  background:
+    radial-gradient(circle at 18% 12%, rgba(20, 184, 166, 0.14), transparent 32rem),
+    radial-gradient(circle at 82% 18%, rgba(139, 92, 246, 0.12), transparent 30rem),
+    linear-gradient(120deg, rgba(16, 185, 129, 0.08), transparent 26%, rgba(236, 72, 153, 0.07) 74%, transparent),
+    linear-gradient(to right, rgba(148, 163, 184, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(148, 163, 184, 0.04) 1px, transparent 1px);
+  background-size: auto, auto, auto, 44px 44px, 44px 44px;
+  mask-image: linear-gradient(to bottom, black 0%, black 72%, transparent 100%);
+}
+
+.light .premium-app-shell {
+  background:
+    linear-gradient(135deg, rgba(247, 248, 251, 1) 0%, rgba(239, 246, 255, 0.96) 48%, rgba(245, 243, 255, 0.94) 100%);
+}
+
+.light .premium-background {
+  background:
+    radial-gradient(circle at 18% 12%, rgba(20, 184, 166, 0.12), transparent 30rem),
+    radial-gradient(circle at 82% 18%, rgba(99, 102, 241, 0.1), transparent 28rem),
+    linear-gradient(120deg, rgba(16, 185, 129, 0.07), transparent 28%, rgba(236, 72, 153, 0.05) 72%, transparent),
+    linear-gradient(to right, rgba(15, 23, 42, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(15, 23, 42, 0.04) 1px, transparent 1px);
+  background-size: auto, auto, auto, 44px 44px, 44px 44px;
 }
 
 /* Custom Scrollbar */

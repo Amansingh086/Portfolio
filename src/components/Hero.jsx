@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { FileText, ArrowRight, Sparkles } from 'lucide-react';
 
 export default function Hero({ profile }) {
@@ -6,12 +6,12 @@ export default function Hero({ profile }) {
   const [titleIdx, setTitleIdx] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   
-  const titles = [
+  const titles = useMemo(() => [
     profile.title,
     "Full-Stack Architect",
     "Creative Problem Solver",
     "UI/UX Dev Craftsman"
-  ];
+  ], [profile.title]);
 
   const typingSpeed = 100;
   const deletingSpeed = 50;
@@ -21,7 +21,12 @@ export default function Hero({ profile }) {
     let timer;
     const currentFullTitle = titles[titleIdx];
 
-    if (isDeleting) {
+    if (isDeleting && typedTitle === '') {
+      timer = setTimeout(() => {
+        setIsDeleting(false);
+        setTitleIdx((prev) => (prev + 1) % titles.length);
+      }, deletingSpeed);
+    } else if (isDeleting) {
       timer = setTimeout(() => {
         setTypedTitle(currentFullTitle.substring(0, typedTitle.length - 1));
       }, deletingSpeed);
@@ -33,13 +38,10 @@ export default function Hero({ profile }) {
 
     if (!isDeleting && typedTitle === currentFullTitle) {
       timer = setTimeout(() => setIsDeleting(true), delayBetweenTitles);
-    } else if (isDeleting && typedTitle === '') {
-      setIsDeleting(false);
-      setTitleIdx((prev) => (prev + 1) % titles.length);
     }
 
     return () => clearTimeout(timer);
-  }, [typedTitle, isDeleting, titleIdx, profile.title]);
+  }, [typedTitle, isDeleting, titleIdx, titles]);
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center pt-24 pb-16 overflow-hidden">
